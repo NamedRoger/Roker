@@ -10,9 +10,6 @@ public class Deck {
     private ArrayList<Card> juego = new ArrayList<Card>();
     private String strFormat = "Quedan %s";
 
-    Deck(){
-    }
-
     public ArrayList<Card> getJuego() {
         return juego;
     }
@@ -25,9 +22,13 @@ public class Deck {
     }
 
     public void init(){
+        initPalos();
         for (Map.Entry<String,String> palo:palos.entrySet()){
+            var paloCard = palo.getKey();
+            var color = palo.getValue();
+
             for (int i=1;i <= 13;i++){
-                Card card = new Card(palo.getKey(), palo.getValue());
+                Card card = new Card(paloCard, color);
                 card.setValor(i);
                 juego.add(card);
             }
@@ -76,7 +77,7 @@ public class Deck {
     }
 
     private Card randomCard(){
-        //inicio - final - constante - el tamaño
+                                                    //inicio - final - constante - el tamaño
         var rnd = (int)Math.floor(Math.random()*(1-juego.size()+1)+juego.size());
         return juego.get(rnd);
     }
