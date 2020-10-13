@@ -11,9 +11,9 @@ public class Main {
         Deck deck = new Deck();
         deck.init();
 
-        //deck.shuffle();
-        //deck.head();
-        //deck.pick();
-        //deck.hand();
+        deck.shuffle();
+        deck.head();
+        deck.pick();
+        deck.hand();
     }
 }

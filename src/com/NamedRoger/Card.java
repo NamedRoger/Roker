@@ -1,6 +1,6 @@
 package com.NamedRoger;
 
-public class Card  {
+public class Card {
     private String palo;
     private String color;
     private String valor;
