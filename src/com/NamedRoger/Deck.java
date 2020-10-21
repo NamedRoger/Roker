@@ -6,22 +6,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Deck {
-    public static  HashMap<String,String> palos = new HashMap<String,String>();
-
+    private HashMap<String,String> palos = new HashMap<String, String>();
     private ArrayList<Card> juego = new ArrayList<Card>();
+    private String strFormat = "Quedan %s";
 
     Deck(){
-        palos.put("Diamante","Rojo");
-        palos.put("Corazón","Rojo");
-        palos.put("Trébol","Negro");
-        palos.put("Pica","Negro");
-
-        init();
-
+        initPalos();
     }
 
     public ArrayList<Card> getJuego() {
         return juego;
+    }
+
+    public void initPalos(){
+        palos.put("Diamante","Rojo");
+        palos.put("Trebol","Negro");
+        palos.put("Pica","Negro");
+        palos.put("Corazon","Rojo");
     }
 
     public void init(){
@@ -30,9 +31,11 @@ public class Deck {
         for (Map.Entry<String,String> palo : palos.entrySet()){
            var paloCard = palo.getKey();
            var color = palo.getValue();
+
             Card card;
             for (int i=1;i <= 13;i++){
-                card = new Card(paloCard, color, i);
+                card = new Card(paloCard, color);
+                card.setValor(i);
                 juego.add(card);
             }
         }
@@ -40,33 +43,47 @@ public class Deck {
 
     public void shuffle(){
         Collections.shuffle(juego);
+        System.out.println("Se mezcló el Deck");
     }
 
-    public Card head(){
-        return juego.remove(juego.size()-1);
+    public void head(){
+        var card = juego.get(juego.size()-1);
+        juego.remove(card);
+        System.out.println(card.toString());
+        System.out.println(String.format(strFormat,juego.size()));
     }
 
-    public Card pick(){
-        return juego.remove(randomCard());
+    public void pick(){
+        var card = randomCard();
+        juego.remove(card);
+        System.out.println(card.toString());
+        System.out.println(String.format(strFormat,juego.size()));
     }
 
-    public ArrayList<Card> hand(){
-        var cards = new ArrayList<Card>();
+    public void hand(){
         if(juego.size() <= 5){
             for (var card:juego){
-                cards.add(head());
+                printHand(juego);
             }
         }else {
+            var cards = new ArrayList<Card>();
+            Card card;
             for (int i=1;i<=5;i++){
-                cards.add(pick());
+                card = randomCard();
+                juego.remove(card);
+                cards.add(card);
             }
+            printHand(cards);
+            System.out.println(String.format(strFormat,juego.size()));
         }
-        return cards;
     }
 
-    private int randomCard(){
-        var max = juego.size() -1;
-        var rnd = (int)Math.floor(Math.random()*(0-max+1)+max);
-        return rnd;
+    private void printHand(ArrayList<Card> cards){
+        cards.forEach(c -> System.out.println(c.toString()));
+    }
+
+    private Card randomCard(){
+        var rnd = (int)Math.floor(Math.random()*(1-juego.size()+1)+juego.size());
+        return juego.get(rnd);
     }
 }

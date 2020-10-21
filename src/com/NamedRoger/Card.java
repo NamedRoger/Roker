@@ -1,40 +1,49 @@
 package com.NamedRoger;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Card {
+    private String palo;
+    private String color;
+    private String valor;
 
-    private final String palo;
-    private final String color;
-    private final String valor;
-
-    Card(String palo,String color, Integer valor){
+    Card(String palo,String color, String valor){
         this.palo = palo;
         this.color = color;
-        this.valor = setValor(valor);
+        this.valor = valor;
+    }
+
+    Card(String palo,String color){
+        this.palo = palo;
+        this.color = color;
     }
 
     public String getPalo() {
         return palo;
     }
 
+    public void setPalo(String palo) {
+        this.palo = palo;
+    }
+
     public String getColor() {
         return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public String getValor() {
         return valor;
     }
 
-    private String setValor(Integer valor) {
+    public void setValor(Integer valor) {
         if(valor <= 10){
-            if(valor == 1) return "A";
-            return valor.toString();
+            if(valor == 1) this.valor = "A";
+            this.valor = valor.toString();
         }else {
-            if(valor == 11) return  "J";
-            else if(valor == 12) return "Q";
-            else return "K";
+            if(valor == 11) this.valor = "J";
+            else if(valor == 12) this.valor = "Q";
+            else this.valor = "K";
         }
     }
 
