@@ -17,7 +17,6 @@ public class Deck {
         palos.put("Pica","Negro");
 
         init();
-
     }
 
     public ArrayList<Card> getJuego() {
@@ -38,25 +37,32 @@ public class Deck {
         }
     }
 
-    public void shuffle(){
-        Collections.shuffle(juego);
-    }
+    public void shuffle(){ Collections.shuffle(juego); }
 
-    public Card head(){
+    public Card head()throws Exception{
+        if(juego.isEmpty() || juego.size() < 1)
+            throw new Exception("Ya no quedan cartas");
+
         return juego.remove(juego.size()-1);
     }
 
-    public Card pick(){
+    public Card pick()throws Exception{
+        if(juego.isEmpty())
+            throw new Exception("Ya no quedan cartas");
+
         return juego.remove(randomCard());
     }
 
-    public ArrayList<Card> hand(){
+    public ArrayList<Card> hand() throws Exception{
         var cards = new ArrayList<Card>();
-        if(juego.size() <= 5){
-            for (var card:juego){
-                cards.add(head());
-            }
-        }else {
+
+        if(juego.isEmpty()){
+            throw new Exception("Ya no quedan cartas");
+        }
+        else if(juego.size() < 5){
+            throw new Exception("No hay suficientes cartas");
+        }
+        else {
             for (int i=1;i<=5;i++){
                 cards.add(pick());
             }

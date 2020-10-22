@@ -39,8 +39,5 @@ public class Card {
     }
 
     @Override
-    public String toString() {
-        String mensaje = "%s, %s, %s";
-        return String.format(mensaje,palo,color,valor);
-    }
+    public String toString() { return String.format("%s, %s, %s",palo,color,valor); }
 }

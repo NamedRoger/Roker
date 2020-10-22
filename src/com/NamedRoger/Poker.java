@@ -12,17 +12,17 @@ public class Poker {
         System.out.println("Se mezcló el Deck");
     }
 
-    public void head(){
+    public void head() throws Exception {
         showSelectedCard(_deck.head());
         showSizeDeck();
     }
 
-    public void pick(){
+    public void pick() throws Exception {
         showSelectedCard(_deck.pick());
         showSizeDeck();
     }
 
-    public void hand(){
+    public void hand() throws Exception {
         _deck.hand().forEach(c -> showSelectedCard(c));
         showSizeDeck();
     }

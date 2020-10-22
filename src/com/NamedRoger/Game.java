@@ -9,20 +9,15 @@ public class Game {
 
     Game(){
         poker = new Poker();
-        isPlayign = true;
-        vecesJugadas = 1;
     }
 
-    public void play()throws Exception{
+    public void play(){
+        isPlayign = true;
+        vecesJugadas = 1;
         do{
             showMenu();
             try {
                 var op = inputOption();
-                if(op < 0 || op > 5){
-                    System.out.println("");
-                    showDivision();
-                    throw new Exception("Introduce una opción Valida");
-                }
 
                 if(op != 0)
                     showDivision();
@@ -34,6 +29,7 @@ public class Game {
 
             }catch (Exception exception){
                 System.out.println(exception.getMessage());
+                showDivision();
             }
         }while (isPlayign);
     }
@@ -54,6 +50,9 @@ public class Game {
     private int inputOption() throws Exception{
         Scanner scn = new Scanner(System.in);
         var op = scn.nextInt();
+        if(op <0 || op >5 )
+            throw new Exception("Introduce una opción Valida");
+
         return op;
     }
 
@@ -61,7 +60,7 @@ public class Game {
         System.out.println("-------------------------------");
     }
 
-    private void evaluteOp(int op){
+    private void evaluteOp(int op) throws Exception {
         switch (op){
             case 1:
                 poker.shuffle();
