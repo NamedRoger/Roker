@@ -22,7 +22,7 @@ public class Game {
                 if(op != 0)
                     showDivision();
 
-                evaluteOp(op);
+                evaluateOp(op);
 
                 if(op != 0)
                     showDivision();
@@ -60,7 +60,7 @@ public class Game {
         System.out.println("-------------------------------");
     }
 
-    private void evaluteOp(int op) throws Exception {
+    private void evaluateOp(int op) throws Exception {
         switch (op){
             case 1:
                 poker.shuffle();
